@@ -7,27 +7,16 @@ export default class Stack {
         this._head = null;
     }
 
-    init(array){
-        if(array.length > 0){
-            let node = new _Node(array[0]);
-            this._head = node;
-            for(let i = 1; i < array.length; i++){
-                node.next = new _Node(array[i]);
-                node = node.next;
-            }
-        }   
-    }
-
     isEmpty(){
         return this._head === null;
     }
     
     /**
-     * Adds the data to the beginning of the list, this allows for Last-In-First-Out because
-     * the later item gets placed at the beginning of the list.
+     * Pushes the data to the beginning of the stack, this allows for Last-In-First-Out because
+     * the later item gets placed at the beginning of the stack.
      * @param data {generic object} that will be used as the data on the Node
      */
-    addFirst(data){
+    push(data){
         let node = new _Node(data);
         if(this.isEmpty()){
             this._head = node;
@@ -38,6 +27,16 @@ export default class Stack {
         }
     }
 
+    /**
+     * Pops the item at the head of the stack (this will be the last item that was pushed)
+     * @returns {generic object} data that was on the popped Node
+     */
+    pop(){
+        let data = this._head.data;
+        this._head = this._head.next;
+        return data;
+    }
+
     toString(){
         const nodes = [];
         let trav = this._head;
@@ -46,16 +45,6 @@ export default class Stack {
             trav = trav.next;
         }
         return nodes.join(" -> ");
-    }
-
-    display(sep=" "){ // prints in the reverse order, arg to either do unshift (r) or push, name it display
-        const nodes = [];
-        let trav = this._head;
-        while(trav !== null){
-            nodes.unshift(trav.data);
-            trav = trav.next;
-        }
-        return nodes.join(sep);
     }
 
     // * indicates a generator function
@@ -92,3 +81,20 @@ class _Node {
         return this._next = node;
     }
 }
+
+
+// Test methods on Stack
+// let stack = new Stack();
+// stack.push("1");
+// stack.push("2");
+// stack.push("3");
+// console.log(`${stack}`);
+// let data = stack.pop();
+// console.log(`pop ${data} off the stack`);
+// console.log(`${stack}`);
+// data = stack.pop();
+// console.log(`pop ${data} off the stack`);
+// console.log(`${stack}`);
+// data = stack.pop();
+// console.log(`pop ${data} off the stack`);
+// console.log(`${stack}`);
