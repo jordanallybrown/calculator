@@ -1,3 +1,8 @@
+
+const PRECEDENCE = {
+
+}
+
 export default class Calculator {
 
     /**
@@ -7,8 +12,20 @@ export default class Calculator {
      */
     constructor(infix){
         this.infix = infix;
+        this.postfix = this.convertToPostfix();
     }
 
+    convertToPostfix(){
+
+    }
+
+    compute(){
+
+    }
+
+    toString(){
+
+    }
     
 
 }

@@ -1,14 +1,14 @@
 # Calculator
 A vanilla javascript calculator that uses the Model-View-Controller (MVC) design pattern.
 
-Once calculator is live, will include a link to view.
+How to run: Once calculator is live, will include a link to view.
 
 ## Model
 #### **Description**
 Manages the data which will be the math expression that the calculator will evaluate and compute a result.
 #### **Implementation**
 - Evaluates the user's infix expression, converts to postfix, and then computes result. 
-- Doubly LinkedList to implement underlying Stack (LIFO) data structure
+-  Singly LinkedList to implement underlying Stack (LIFO) data structure
 
 ## View
 #### **Description**
