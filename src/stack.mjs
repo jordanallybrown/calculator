@@ -37,6 +37,14 @@ export default class Stack {
         return data;
     }
 
+    /**
+     * Returns the data currently at the head of the stack, allows us to peek to see the head's item
+     * @returns {data object} data on the node
+     */
+    peek(){
+        return this._head.data;
+    }
+
     toString(){
         const nodes = [];
         let trav = this._head;
