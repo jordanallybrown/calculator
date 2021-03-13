@@ -10,6 +10,7 @@ export default class Calculator {
      */
     constructor(infix){
         this.infix = infix;
+        this.stack = new Stack();
         this.postfix = this.convertToPostfix();
     }
 
@@ -19,6 +20,10 @@ export default class Calculator {
 
     isOperator(str){
         return !(str.search(/(-|\+|%|x|\*|\/)/g) === -1);
+    }
+
+    isUnary(char){
+        return !(str.search(/(!)/g) === -1);
     }
 
     precedence(char){
@@ -34,6 +39,8 @@ export default class Calculator {
         }
     }
 
+
+
     /**
      * Converts the user's infix expression to postfix format
      * @returns {string} postfix version of the infix expression
@@ -41,7 +48,7 @@ export default class Calculator {
     convertToPostfix(){
         // the resulting postfix (more efficient to store in array than build string)
         const postfix = []; 
-        const stack = new Stack();
+
         for (let char of this.infix){
             // If char is a number, append to postfix
             if (this.isDigit(char)){
@@ -51,35 +58,94 @@ export default class Calculator {
             else if (this.isOperator(char)){
 
                 // Push operator onto stack if empty or if currOp has greater than precedence of stackOp
-                if (stack.isEmpty() || this.precedence(char) > this.precedence(stack.peek())) { 
-                    stack.push(char);
+                if (this.stack.isEmpty() || this.precedence(char) > this.precedence(this.stack.peek())) { 
+                    this.stack.push(char);
                 }
                 
                 // While currOp has less  or equal precedence than stackOp, pop stackOp to append to postfix. 
                 //Once you reach a stackOp w/ greater than precedence (or exhausted the stack), push currOp to stack
                 else {
-                    while ((!stack.isEmpty()) && this.precedence(char) <= this.precedence(stack.peek())) {
-                        postfix.push(stack.pop());
+                    while ((!this.stack.isEmpty()) && this.precedence(char) <= this.precedence(this.stack.peek())) {
+                        postfix.push(this.stack.pop());
                     }
-                    stack.push(char);
+                    this.stack.push(char);
                 }
             }
         }
 
         // Ensure we exhaust the stack and append to postfix (not sure if I need this step here)
-        while (!stack.isEmpty()) {
-            postfix.push(stack.pop());
+        while (!this.stack.isEmpty()) {
+            postfix.push(this.stack.pop());
         }
 
         return postfix.join("");
     }
 
-    compute(){
+    _eval(operator, ...operands){
+        if(operands.length == 2){ // greater than 1 ? 
+            let op1 = parseInt(operands[0]);
+            let op2 = parseInt(operands[1]);
+            let result;
+            switch (operator){
+                case '+':
+                    result = op1 + op2;
+                    break;
+                case '-':
+                    result = op1 - op2;
+                    break;
+                case '/':
+                    result = op1 / op2;
+                    break;
+                case '%':
+                    result = op1 % op2;
+                    break;
+                case 'x':
+                case '*':
+                    result = op1 * op2;
+                    break;
+                default:
+                    result = 0;
+                    break;
+            }
 
+            return result.toString();
+        }
+
+        // for now I don't have unary, but might in enhancements
+    }
+
+   /**
+    * Calculates the result of the postfix expresssion
+    * @returns {string} string representation of the result of the postfix expression evaluated
+    */
+    compute(){
+        let op1, op2, result;
+        for (let char of this.postfix){
+            if (this.isDigit(char)){ // push operands on the stack
+                this.stack.push(char);
+            }
+            else { // is an operator
+
+                // add first operand from stack to list of operands
+
+                // if operator is not unary, assume binary and add another operand for evaluation
+                // if(!this.isUnary(char)){
+                    // a gotcha here, since we need to respect order of operations since not all operations are Commutative (e.g. /,-)
+                op2 = this.stack.pop();
+                op1 = this.stack.pop();
+                // }
+
+                // Evaluate the operands to reduce to a result and push this result to stack
+                result = this._eval(char, op1, op2); // the spread operator takes care of converting these into an array
+                this.stack.push(result);
+            }
+        }
+        // Should have only 1 value left which is result of expression
+        return this.stack.pop();
     }
 
     toString(){
-
+        return this.postfix;
     }
 
 }
@@ -87,8 +153,9 @@ export default class Calculator {
 // Test calculator methods
 let a = "2+3*4-5";
 let b = "2+3-5+6";
+let c = "2+3";
 const calc = new Calculator(a);
-console.log(calc.convertToPostfix());
+console.log(calc.compute());
 // for (let m of "hello"){
 //     console.log(m);
 // }
