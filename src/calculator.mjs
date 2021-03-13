@@ -38,12 +38,11 @@ export default class Calculator {
      * Converts the user's infix expression to postfix format
      * @returns {string} postfix version of the infix expression
      */
-    convertToPostfix(infix){
+    convertToPostfix(){
         // the resulting postfix (more efficient to store in array than build string)
         const postfix = []; 
         const stack = new Stack();
-        let char;
-        for (char of infix){
+        for (let char of this.infix){
             // If char is a number, append to postfix
             if (this.isDigit(char)){
                 postfix.push(char);
@@ -51,15 +50,15 @@ export default class Calculator {
             // If char is an operator ... 
             else if (this.isOperator(char)){
 
-                // Push operator onto stack if empty or if currOp has greater than or equal precedence of stackOp
-                if (stack.isEmpty() || this.precedence(char) >= this.precedence(stack.peek())) { 
+                // Push operator onto stack if empty or if currOp has greater than precedence of stackOp
+                if (stack.isEmpty() || this.precedence(char) > this.precedence(stack.peek())) { 
                     stack.push(char);
                 }
                 
-                // While currOp has less precedence than stackOp, pop stackOp to append to postfix. Once you reach
-                // a stackOp w/ greater than/equal precedence (or exhausted the stack), push currOp to stack
+                // While currOp has less  or equal precedence than stackOp, pop stackOp to append to postfix. 
+                //Once you reach a stackOp w/ greater than precedence (or exhausted the stack), push currOp to stack
                 else {
-                    while ((!stack.isEmpty()) && this.precedence(char) < this.precedence(stack.peek())) {
+                    while ((!stack.isEmpty()) && this.precedence(char) <= this.precedence(stack.peek())) {
                         postfix.push(stack.pop());
                     }
                     stack.push(char);
@@ -86,9 +85,13 @@ export default class Calculator {
 }
 
 // Test calculator methods
-const calc = new Calculator("2+3");
-console.log(calc.convertToPostfix("2+3"));
-
+let a = "2+3*4-5";
+let b = "2+3-5+6";
+const calc = new Calculator(a);
+console.log(calc.convertToPostfix());
+// for (let m of "hello"){
+//     console.log(m);
+// }
 
 
 // console.log(calc.isDigit("6"));
