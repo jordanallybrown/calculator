@@ -15,6 +15,9 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+    color: #4b4949;
 }
 
 .grid-container {
@@ -26,43 +29,71 @@ body{
     /* grid-template-columns: 45px 45px 45px 45px; */
     /* grid-template-rows: 45px 45px 45px 45px 45px 45px; */
     /* grid-template-rows: 45px 45px 45px 45px 45px; */
-    grid-gap: 3px;
-    background-color: #2196F3;
+    /* grid-gap: 3px; */
+    /* background-color: #ccf2f4; */
+    /* background:#a4ebf3; */
+    /* background: #17C3B2; */
+    /* background: #FE6D73; */
+    background: #FEF9EF;
     padding: 10px;
+    /* border: 2px solid burlywood; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .grid-container > button {
-    background-color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.5);
     text-align: center;
     padding: 20px 0;
     font-size: 30px;
-    /* border: 3px solid red; */
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+    color: #4b4949;
+    border: none;
+    /* border-radius: 10px; */
+    user-select: none;
+    cursor: pointer;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    /* color:pink; */
+    /* border: 3px solid pink; */
   }
 
   .console {
     grid-column: 1 / span 4;
-    background-color: rgba(255, 255, 255, 0.8);
+    /* background-color: rgba(255, 255, 255, 0.8); */
     text-align: center;
-    /* padding: 20px 0; */
     border: 3px solid pink;
     font-size: 30px;
     display: grid;
     text-align: right;
     grid-template-rows: auto auto;
     grid-template-columns: auto;
+    
   }
 
   .result {
     /* height: 50%; */
     /* height: 60%; */
     padding: 30px 10px;
-    border: 2px solid green;
+    /* border: 2px solid green; */
+    /* background: #f4f9f9;
+    color: #aaaaaa; */
+    background: #FEF9EF;
   }
 
   .expression {
     /* height: 40%; */
+    /* background-color: #F8F8F8; */
     padding: 10px 10px;
-      border: 2px solid lightcoral;
+    /* color: #ACACAC; */
+      /* border: 2px solid lightcoral; */
+      /* background: #f4f9f9;
+    color: #aaaaaa; */
+    background: #FEF9EF;
+  }
+
+  .key1{
+      
   }
 
   /* Responsive layout - make calculator full screen on phones */
