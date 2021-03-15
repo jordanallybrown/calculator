@@ -8,7 +8,7 @@ How to run: Once calculator is live, will include a link to view.
 Manages the data which will be the math expression that the calculator will evaluate and compute a result.
 #### **Implementation**
 - Evaluates the user's infix expression, converts to postfix, and then computes result. 
--  Singly LinkedList to implement underlying Stack (LIFO) data structure
+- Implement Stack (LIFO) using a Singly LinkedList as the underlying data structure
 
 ## View
 #### **Description**
