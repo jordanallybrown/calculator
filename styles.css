@@ -16,8 +16,9 @@ body{
     justify-content: center;
     align-items: center;
     font-family: 'Rubik', sans-serif;
-    font-weight: 700;
-    color: #4b4949;
+    font-weight: 500;
+    color: #212529;
+    background: #F6F6F6;
 }
 
 .grid-container {
@@ -34,19 +35,36 @@ body{
     /* background:#a4ebf3; */
     /* background: #17C3B2; */
     /* background: #FE6D73; */
-    background: #FEF9EF;
-    padding: 10px;
-    /* border: 2px solid burlywood; */
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* background: #FEF9EF; */
+    background: #FFFFFF;
+    /* padding: 10px; */
+    padding: 0;
+    /* border-radius: 10px; */
+    /* border: 1px solid #FFFFFF; */
+    border: 1px solid #FFFFFF;
+/* border-radius: 19px; */
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    /* -webkit-box-shadow: 9px 8px 15px 5px rgba(165,165,165,0.59); 
+box-shadow: 9px 8px 15px 5px rgba(165,165,165,0.59); */
+box-shadow: 9px 8px 15px 5px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.grid-container > button {
-    background: rgba(255, 255, 255, 0.5);
+.circle {
+  /* border-radius: 50%; */
+  /* border: 2px solid black; */
+  /* height: 45px;
+  width: 45px;
+  text-align: center; */
+}
+
+button {
+    /* background: rgba(255, 255, 255, 0.5); */
+    background: #FFFFFF;
     text-align: center;
     padding: 20px 0;
-    font-size: 30px;
+    font-size: 25px;
     font-family: 'Rubik', sans-serif;
-    font-weight: 700;
+    font-weight: 500;
     color: #4b4949;
     border: none;
     /* border-radius: 10px; */
@@ -54,15 +72,28 @@ body{
     cursor: pointer;
     outline: none;
     -webkit-tap-highlight-color: transparent;
+    
     /* color:pink; */
     /* border: 3px solid pink; */
   }
 
+  button:active {
+
+    /* lower the opactiy to 12 so it looks a bit darker when you click on key */
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+  .key{
+    border: none;
+    
+  }
+  
   .console {
     grid-column: 1 / span 4;
     /* background-color: rgba(255, 255, 255, 0.8); */
     text-align: center;
-    border: 3px solid pink;
+    /* border: 3px solid pink; */
+    margin: 0;
     font-size: 30px;
     display: grid;
     text-align: right;
@@ -75,25 +106,30 @@ body{
     /* height: 50%; */
     /* height: 60%; */
     padding: 30px 10px;
+    font-size: 40px;
     /* border: 2px solid green; */
     /* background: #f4f9f9;
     color: #aaaaaa; */
-    background: #FEF9EF;
+    /* background: #FEF9EF; */
+    /* background: #f8f8f8; */
+    background: #FAFAFA;
+    /* color: #212529; */
   }
 
   .expression {
     /* height: 40%; */
     /* background-color: #F8F8F8; */
     padding: 10px 10px;
+    font-size: 20px;
+    color: #8F9AA3;
+    font-weight: 500;
     /* color: #ACACAC; */
       /* border: 2px solid lightcoral; */
       /* background: #f4f9f9;
     color: #aaaaaa; */
-    background: #FEF9EF;
-  }
-
-  .key1{
-      
+    /* background: #FEF9EF; */
+    /* background: #f8f8f8; */
+    background: #FAFAFA;
   }
 
   /* Responsive layout - make calculator full screen on phones */
