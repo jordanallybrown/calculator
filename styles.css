@@ -24,7 +24,7 @@ body{
 .grid-container {
     /* margin: auto; */
     display: grid;
-    width: 30%;
+    /* width: 30%; */
     /* grid-template-columns: 80px 200px auto 30px; */
     grid-template-columns: auto auto auto auto;
     /* grid-template-columns: 45px 45px 45px 45px; */
@@ -67,6 +67,7 @@ button {
     font-weight: 500;
     color: #4b4949;
     border: none;
+    width: 12%;
     /* border-radius: 10px; */
     user-select: none;
     cursor: pointer;
