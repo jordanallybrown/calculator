@@ -1,64 +1,19 @@
-*, *::before, *::after {
-    /* makes things easier to style our elements */
-    box-sizing: border-box; 
-    /* set font family here so that it applies to all elements */
-    font-family: 'Rubik', sans-serif; 
-    font-weight: normal;
-}
-
-body{
-    /* remove padding and margin so that background fills entire screen */
-    padding: 0;
+* { 
     margin: 0;
-    /* first color is on left, second color goes to right */
-    background: linear-gradient(to right, #e66465, #9198e5);
-    /* display: flex;
-    flex-wrap: wrap; */
-    /* min-height: 100vh; */
-
+    padding: 0;
+    box-sizing: border-box; 
 }
 
-.calculator-grid {
-    /* display: grid; */
-    /* center all items */
-    /* justify-content: center;
-    align-content: center; */
-
-    /* height: 100vh; */
-    /* width: 100vw; */
-    /* min-width: 100vw; */
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    /* flex: 100%; */
-    /* flex-grow: 1; */
-    /* grid-template-columns: repeat(4, auto); */
-    /* grid-template-rows: minmax(auto, auto) repeat(5, 100px); */
-    /* grid-auto-rows: minmax(auto, auto); */
-    border: 20px solid green;
-    
-    
+.calculator-grid{
+    height: 100vh;
+    width: 100vw;
+    border: 10px solid green; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #212529;
+    background: #F6F6F6;
 }
 
-.calculator-grid > button {
-    margin: 2px;
-    position:relative;
-    text-align: center;
-    border-radius:4px;
-    text-decoration: none;
-    font-family:'PT Sans',helvetica;
-    background: #69c773;
-    display: inline-block;
-    font-size: 17px !important;
-    padding: 10px 10px 10px 10px;
-    color: #FFF;
-}
 
-/* @media (max-width: 800px) {
-    .calculator-grid {
-      flex: 100%;
-    }
-  } */
 
