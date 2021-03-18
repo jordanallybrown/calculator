@@ -4,7 +4,7 @@
     box-sizing: border-box; 
 }
 
-.calculator-grid{
+/* .calculator-grid{
     height: 100vh;
     width: 100vw;
     border: 10px solid green; 
@@ -13,6 +13,15 @@
     align-items: center;
     color: #212529;
     background: #F6F6F6;
+} */
+
+.calculator-grid {
+    height: 100vh;
+    width: 100vw;
+    border: 10px solid green;
+background-repeat: no-repeat;
+background-position: center top;
+overflow: hidden
 }
 
 
