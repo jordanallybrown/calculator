@@ -20,21 +20,15 @@ body{
     /* center all items */
     /* justify-content: center;
     align-content: center; */
-    /* This is not yet centered vertically becuz calc grid does not take up
-    full height, take a look at border to see this.  */
-    /* takes up 100% of the view height all of the time */
-    min-height: 100vh;
+
+    height: 100vh;
+    /* width: 100vw; */
     /* min-width: 100vw; */
 
-
-    border: 10px solid green;
-    grid-template-columns: repeat(4, 100px);
-    /* We want the rows to grow as large as they need to and wrap around, set minmax so 
-    at a minimum we want the rows 120px tall and then grow as needed */
-    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
-
-    /* grid-template-columns: repeat(4, auto);
-    grid-template-rows: minmax(auto, auto) repeat(5, 100px); */
+    grid-template-columns: repeat(4, auto);
+    /* grid-template-rows: minmax(auto, auto) repeat(5, 100px); */
+    grid-auto-rows: minmax(auto, auto);
+    border: 5px solid green;
     
 }
 
@@ -50,22 +44,21 @@ body{
     /* the last value is opacity */
     background-color: rgba(255, 255, 255, .90);
 }
-
 .output {
     /* span from the first to the last column */
     grid-column: 1 / -1;
     /* want it to be black this time */
     background-color: rgba(0, 0, 0, .75);
     /* align the items inside of the container */
-    display: flex;
+    /* display: flex;
     align-items: flex-end;
     justify-content: space-around;
     flex-direction: column;
-    padding: 10px;
+    padding: 10px; */
     /* Need to wrap since numbers can get long, break the number in the middle
     not just end of line or space and break all words*/
-    word-wrap: break-word; 
-    word-break: break-all;
+    /* word-wrap: break-word; 
+    word-break: break-all; */
 }
 
 .output .expression {
@@ -77,5 +70,3 @@ body{
     color: white;
     font-size: 2.5rem;
 }
-
-
