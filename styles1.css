@@ -72,7 +72,6 @@ at a minimum we want the rows 120px tall and then grow as needed */
 .output .expression {
     color: rgba(255, 255, 255, .75);
     font-size: 1.5rem;
-    display: none;
 }
 
 .output .result {
