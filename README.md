@@ -1,7 +1,7 @@
 # Calculator
 A vanilla javascript calculator that uses the Model-View-Controller (MVC) design pattern.
 
-How to run: Once calculator is live, will include a link to view.
+View calculator [here](https://jordanallybrown.github.io/calculator/). For iOS mobile devices, hide toolbar to see full calculator view. 
 
 ## Model
 #### **Description**

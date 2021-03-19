@@ -18,23 +18,16 @@ body{
 .calculator-grid {
     display: grid;
     /* center all items */
-    /* justify-content: center;
-    align-content: center; */
+    justify-content: center;
+    align-content: center;
     /* This is not yet centered vertically becuz calc grid does not take up
     full height, take a look at border to see this.  */
     /* takes up 100% of the view height all of the time */
     min-height: 100vh;
-    /* min-width: 100vw; */
-
-
-    border: 10px solid green;
     grid-template-columns: repeat(4, 100px);
     /* We want the rows to grow as large as they need to and wrap around, set minmax so 
     at a minimum we want the rows 120px tall and then grow as needed */
     grid-template-rows: minmax(120px, auto) repeat(5, 100px);
-
-    /* grid-template-columns: repeat(4, auto);
-    grid-template-rows: minmax(auto, auto) repeat(5, 100px); */
     
 }
 
@@ -77,5 +70,17 @@ body{
     color: white;
     font-size: 2.5rem;
 }
+
+@media (max-width: 812px) {
+    .calculator-grid {
+    height: 100vh;
+    width: 100vw; 
+    overflow: hidden;
+    justify-content: initial;
+    align-content: initial;
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: minmax(auto, auto) repeat(5, auto);
+    }
+  }
 
 
