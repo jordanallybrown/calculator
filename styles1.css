@@ -26,6 +26,9 @@ background-position: center top;
 overflow: hidden;
 background: linear-gradient(to right, #e66465, #9198e5);
 display: grid;
+min-height: 100vh;
+    /* justify-content: center;
+    align-content: center; */
 /* grid-template-columns: repeat(4, 100px); */
 /* We want the rows to grow as large as they need to and wrap around, set minmax so 
 at a minimum we want the rows 120px tall and then grow as needed */
@@ -69,6 +72,7 @@ at a minimum we want the rows 120px tall and then grow as needed */
 .output .expression {
     color: rgba(255, 255, 255, .75);
     font-size: 1.5rem;
+    display: none;
 }
 
 .output .result {
