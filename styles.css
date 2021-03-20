@@ -4,12 +4,14 @@
     /* set font family here so that it applies to all elements */
     font-family: 'Rubik', sans-serif; 
     font-weight: normal;
+    margin: 0;
+    padding: 0;
 }
 
 body{
     /* remove padding and margin so that background fills entire screen */
-    padding: 0;
-    margin: 0;
+    /* padding: 0;
+    margin: 0; */
     /* first color is on left, second color goes to right */
     background: linear-gradient(to right, #e66465, #9198e5);
 
@@ -78,6 +80,10 @@ body{
     overflow: hidden;
     justify-content: initial;
     align-content: initial;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background: linear-gradient(to right, #e66465, #9198e5);
+    min-height: 100vh;
     grid-template-columns: repeat(4, auto);
     grid-template-rows: minmax(auto, auto) repeat(5, auto);
     }
