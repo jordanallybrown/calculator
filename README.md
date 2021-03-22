@@ -9,6 +9,7 @@ Manages the data which will be the math expression that the calculator will eval
 #### **Implementation**
 - Evaluates the user's infix expression, converts to postfix, and then computes result. 
 - Implement Stack (LIFO) using a Singly LinkedList as the underlying data structure
+- Use the Factory Design Pattern to create different types of operators (instead of using switch cases) so that additional operators in the future are easily extended
 
 ## View
 #### **Description**
