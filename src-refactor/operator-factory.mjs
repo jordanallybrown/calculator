@@ -18,9 +18,7 @@ const PRECEDENCE = {
  * Represents an operator that can apply operations to exactly 2 operands
  */
 class BinaryOperator {
-    constructor(operand1, operand2, operator, precedence){
-        this._operand1 = operand1;
-        this._operand2 = operand2;
+    constructor(operator, precedence){
         this._operator = operator;
         this._precedence = precedence;
     }
@@ -34,8 +32,7 @@ class BinaryOperator {
  * Represents an operator that can apply operations to exactly 1 operand
  */
 class UnaryOperator {
-    constructor(operand, operator, precedence){
-        this._operand = operand;
+    constructor(operator, precedence){
         this._operator = operator;
         this._precedence = precedence;
     }
@@ -52,52 +49,52 @@ class UnaryOperator {
  */
 
 class Addition extends BinaryOperator {
-    constructor(props){
-        super(props.operand1, props.operand2, '+', PRECEDENCE['+']);
+    constructor(){
+        super('+', PRECEDENCE['+']);
     }
 
-    apply(){
-        return this._operand1 + this._operand2;
+    apply(operand1, operand2){
+        return operand1 + operand2;
     }
 }
 
 class Subtraction extends BinaryOperator {
-    constructor(props){
-        super(props.operand1, props.operand2, '-', PRECEDENCE['-']);
+    constructor(){
+        super('-', PRECEDENCE['-']);
     }
 
-    apply(){
-        return this._operand1 - this._operand2;
+    apply(operand1, operand2){
+        return operand1 - operand2;
     }
 }
 
 class Division extends BinaryOperator {
-    constructor(props){
-        super(props.operand1, props.operand2, '/', PRECEDENCE['/']);
+    constructor(){
+        super('/', PRECEDENCE['/']);
     }
 
-    apply(){
-        return this._operand1 / this._operand2;
+    apply(operand1, operand2){
+        return operand1 / operand2;
     }
 }
 
 class Multiplication extends BinaryOperator {
-    constructor(props){
-        super(props.operand1, props.operand2, '*', PRECEDENCE['*']);
+    constructor(){
+        super('*', PRECEDENCE['*']);
     }
 
-    apply(){
-        return this._operand1 * this._operand2;
+    apply(operand1, operand2){
+        return operand1 * operand2;
     }
 }
 
 class Modulus extends BinaryOperator {
-    constructor(props){
-        super(props.operand1, props.operand2, '%', PRECEDENCE['%']);
+    constructor(){
+        super('%', PRECEDENCE['%']);
     }
 
-    apply(){
-        return this._operand1 % this._operand2;
+    apply(operand1, operand2){
+        return operand1 % operand2;
     }
 }
 
@@ -120,12 +117,16 @@ let registeredOperatorFactories = {
  * @param props {dict} contains keys operand1 and/or operand2 mapping to numbers
  * @returns {Operator}
  */
-function createOperator(type, props) {
-    return new registeredOperatorFactories[type](props);
+function createOperator(type) {
+    return new registeredOperatorFactories[type]();
+}
+
+function createOperatorCache(){
+    
 }
 
 
-const add = createOperator("+", {operand1:1, operand2:2});
+const add = createOperator("+");
 console.log(add);
 console.log(`${add}`);
-console.log(add.apply());
+console.log(add.apply(2, 3));
