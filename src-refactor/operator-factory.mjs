@@ -45,7 +45,9 @@ class UnaryOperator {
 
 /**
  * Create subclasses from Binary and Unary operators since functionality is shared 
- * with only difference being the symbol and computation in apply
+ * with only difference being the symbol and computation in apply. Pass in operands
+ * in apply method so that the class can be reusable and different operands can 
+ * be passed in each time.
  */
 
 class Addition extends BinaryOperator {
@@ -121,12 +123,25 @@ function createOperator(type) {
     return new registeredOperatorFactories[type]();
 }
 
+/**
+ * Factory function to create an operator cache that contains the operator classes
+ * @returns {object} maps operator symbols to corresponding Operator objects that are registered
+ */
 function createOperatorCache(){
-    
+    const cache = {};
+    for (const op in registeredOperatorFactories){
+        cache[op] = new registeredOperatorFactories[op]();
+    }
+    return cache;
 }
 
 
-const add = createOperator("+");
+// const add = createOperator("+");
+// console.log(add);
+// console.log(`${add}`);
+// console.log(add.apply(2, 3));
+
+const cache = createOperatorCache();
+const add = cache['+'];
 console.log(add);
-console.log(`${add}`);
 console.log(add.apply(2, 3));
