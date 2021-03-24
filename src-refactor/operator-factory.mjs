@@ -1,4 +1,4 @@
-export { createOperator as default };
+export { createOperatorCache, isRegistered };
 
 const PRECEDENCE = {
     '*': 70,
@@ -21,6 +21,19 @@ class BinaryOperator {
     constructor(operator, precedence){
         this._operator = operator;
         this._precedence = precedence;
+        this._operands = 2;
+    }
+
+    get precedence(){
+        return this._precedence;
+    }
+
+    get operator(){
+        this._operator;
+    }
+
+    get operands(){
+        return this._operands;
     }
 
     toString(){
@@ -35,6 +48,19 @@ class UnaryOperator {
     constructor(operator, precedence){
         this._operator = operator;
         this._precedence = precedence;
+        this._operands = 1;
+    }
+
+    get precedence(){
+        return this._precedence;
+    }
+
+    get operator(){
+        this._operator;
+    }
+
+    get operands(){
+        return this._operands;
     }
 
     toString(){
@@ -135,13 +161,22 @@ function createOperatorCache(){
     return cache;
 }
 
+/**
+ * 
+ * @param operator {string} operator symbol
+ * @returns {boolean} true if operator is registered, otherwise false
+ */
+function isRegistered(operator){
+    return operator in registeredOperatorFactories;
+}
+
 
 // const add = createOperator("+");
 // console.log(add);
 // console.log(`${add}`);
 // console.log(add.apply(2, 3));
 
-const cache = createOperatorCache();
-const add = cache['+'];
-console.log(add);
-console.log(add.apply(2, 3));
+// const cache = createOperatorCache();
+// const add = cache['+'];
+// console.log(add);
+// console.log(add.apply(2, 3));
