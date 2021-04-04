@@ -126,27 +126,6 @@ export default class View {
 
 }
 
-class _Digit {
-
-    constructor(value){
-        this._value = value;
-        this._isNegative = false;
-    }
-
-    hasDecimal(){
-        return !(this._value.search('.') === -1)
-    }
-
-    get isNegative(){
-        return this._isNegative;
-    }
-
-    toggleSign(){
-        this._isNegative = !this._isNegative;
-    }
-
-}
-
 class _OutputParser {
     constructor(){
         this._expression = [];
@@ -181,12 +160,6 @@ class _OutputParser {
         return this._expression[this._expression.length - 1] = char;
     }
 
-    _isDigit(char){
-        return !(char.search(/\d/g) === -1);
-    }
-
-
-    //TODO: Have to handle negatives at some point, not sure how this is working atm
 
     appendMinus(input){
         let prev = this.getPreviousChar();
@@ -251,10 +224,6 @@ class _OutputParser {
 
     clear(){
         this._expression = [];
-    }
-
-    pop(){
-        this._expression.pop();
     }
 
     backspace(){
