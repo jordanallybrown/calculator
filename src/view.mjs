@@ -1,4 +1,4 @@
-import Calculator from "./model/calculator.mjs";
+import Calculator from "./calculator.mjs";
 
 const KEYS = [
     'C', '+/-', '%', '/', 
@@ -10,7 +10,7 @@ const KEYS = [
 
 const OPERATORS = ['/', '*', '-', '+', '%'];
 
-export default class View {
+export default class CalculatorViewer {
 
     constructor(){
 
@@ -48,17 +48,18 @@ export default class View {
     updateConsole(){ // updates both the expression and the result
         // console.log(this.outputParser.expression);
         this.consoleExpression.textContent = this.outputParser.expression;
-        console.log('The current console list is:');
-        console.log(this.outputParser.displayExpression());
+        // console.log('The current console list is:');
+        // console.log(this.outputParser.displayExpression());
     }
 
     updateConsoleResult(){
+        
         this.consoleResult.textContent = this.outputParser.result;
-        console.log('The result is:');
-        console.log(this.outputParser.result);
-        // Clear the expression but not the console viewer, so 
-        // this shows the very last result that was present
-        // this.outputParser.clear();
+        
+        
+        // console.log('The result is:');
+        // console.log(this.outputParser.result);
+        
     }
 
 
@@ -181,7 +182,9 @@ class _OutputParser {
     }
 
     updateResult(){
-        if(this._expression.length > 0){
+        const prev = this.getPreviousChar();
+        // Only evaluate valid expressions so cannot end w/ operators or be empty
+        if(this._expression.length > 0 && !(OPERATORS.includes(prev)) ){
             this._result = this._calculator.calculate(this._expression);
         }
     }
@@ -270,9 +273,3 @@ class _OutputParser {
 
 
 }
-
-// once all of the DOM has loaded on the page
-window.addEventListener('DOMContentLoaded', function() {
-    const view = new View();
-
-});
