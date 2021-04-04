@@ -91,6 +91,7 @@ export default class View {
                         keyElement.addEventListener('click', () => {
                             this.outputParser.clear();
                             this.updateConsole();
+                            this.updateConsoleResult();
                         });
                         break;
                     case '.':
@@ -249,6 +250,7 @@ class _OutputParser {
 
     clear(){
         this._expression = [];
+        this._result = "";
     }
 
     backspace(){
