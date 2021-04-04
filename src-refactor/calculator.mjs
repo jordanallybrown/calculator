@@ -1,54 +1,20 @@
 import Stack from "./stack.mjs";
 import { createOperatorCache } from "./operator-factory.mjs"; 
 
+DECIMAL_PLACE = 1000000;
+
 export default class Calculator {
 
     constructor(){
         this._operatorCache = createOperatorCache();
     }
 
-    eval(expression){
+    calculate(expression){
         const postfix = this._convertToPostfix(expression);
-        return this._eval(postfix);
-    }
-
-    /**
-     * 
-     * @param infix {string} mathematical expression in infix form
-     * @returns {string} postfix version of the infix expression
-     */
-    _convertToPostfix(infix){
-        const postfix = [], stack = new Stack(); 
-
-        for (const char of infix){
-            // If char is something other than operator, i.e. number, add to resulting postfix
-            if (!(char in this._operatorCache)) 
-                postfix.push(char);
-            
-            else{ // If char is operator
-
-                // Push operator onto stack if empty or if currOp has greater than precedence of stackOp
-                if (stack.isEmpty() || this._operatorCache[char].precedence > this._operatorCache[stack.peek()].precedence)
-                    stack.push(char);
-                
-                else{
-                    // While currOp has less  or equal precedence than stackOp, pop stackOp to append to postfix. 
-                    //Once you reach a stackOp w/ greater than precedence (or exhausted the stack), push currOp to stack
-                    while ((!stack.isEmpty()) && this._operatorCache[char].precedence <= this._operatorCache[stack.peek()].precedence) {
-                        postfix.push(stack.pop());
-                    }
-                    stack.push(char);
-                }
-            }
-        }
-
-        // Ensure we exhaust the stack and append to postfix 
-        while (!stack.isEmpty()) {
-            postfix.push(stack.pop());
-        }
-        
-        return postfix.join("");
-
+        const resultStr = this._eval(postfix);
+        // Round up to 6 decimal places
+        const result = Math.round((parseFloat(resultStr) + Number.EPSILON) * DECIMAL_PLACE) / DECIMAL_PLACE;
+        return result.toString();
     }
 
     /**
@@ -56,7 +22,7 @@ export default class Calculator {
      * @param infix {string} mathematical expression in infix form
      * @returns {array} a list of tokens (digits, operators) in postfix format
      */
-    _convertToPostfix2(infix){
+    _convertToPostfix(infix){
         const postfixTokens = [], stack = new Stack(); 
         let token = [], prevChar = null;
         
@@ -128,7 +94,7 @@ export default class Calculator {
                     case 2:
                         op2 = stack.pop(); // gotcha, must respect order of operatations, since not all are commutative
                         op1 = stack.pop();
-                        result = this._operatorCache[char].apply(parseInt(op1), parseInt(op2)); //parseFloat if decimal
+                        result = this._operatorCache[char].apply(parseFloat(op1), parseFloat(op2)); //parseFloat if decimal
                         stack.push(result.toString()); // keep types in stack consistent
                         break;
                     default: 
@@ -148,7 +114,8 @@ export default class Calculator {
 // console.log(postfixconverter.postfix);
 
 const calc = new Calculator();
-let result = calc._convertToPostfix2("-2.56+-3.*4-5");
+let result = calc.calculate("-2.56+-3.*4-5");
+// let result = calc.calculate("123.2345477");
 console.log(`${result}`);
-let result1 = calc._convertToPostfix("2+3*4-5");
-console.log(`${result1}`);
+// let result1 = calc._convertToPostfix("2+3*4-5");
+// console.log(`${result1}`);
