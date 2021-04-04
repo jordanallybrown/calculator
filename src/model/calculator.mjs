@@ -1,7 +1,7 @@
 import Stack from "./stack.mjs";
 import { createOperatorCache } from "./operator-factory.mjs"; 
 
-DECIMAL_PLACE = 1000000;
+const DECIMAL_PLACE = 1000000;
 
 export default class Calculator {
 
@@ -10,7 +10,7 @@ export default class Calculator {
     }
 
     calculate(expression){
-        const postfix = this._convertToPostfix(expression);
+        const postfix = this._convertTokensToPostfix(expression);
         const resultStr = this._eval(postfix);
         // Round up to 6 decimal places
         const result = Math.round((parseFloat(resultStr) + Number.EPSILON) * DECIMAL_PLACE) / DECIMAL_PLACE;
@@ -18,6 +18,7 @@ export default class Calculator {
     }
 
     /**
+     * This handles an infix expression that is one single string i.e. "2+34+-6".
      * 
      * @param infix {string} mathematical expression in infix form
      * @returns {array} a list of tokens (digits, operators) in postfix format
@@ -74,6 +75,48 @@ export default class Calculator {
         
     }
 
+    /**
+     * This handles an infix expression that contains a list of tokens i.e. ["2", "+", "-6.0"]
+     * 
+     * @param infix {array} contains strings that represent operators and operands (decimal/ints)
+     * @returns {array} a list of tokens (digits, operators) in postfix format
+     */
+    _convertTokensToPostfix(infix){
+        const postfixTokens = [], stack = new Stack(); 
+        
+        for (const char of infix){
+            // If char is something other than operator, i.e. number, add to token
+            if (!(char in this._operatorCache)) 
+                postfixTokens.push(char);
+            
+            else{ // If char is operator
+
+                // Push operator onto stack if empty or if currOp has greater than precedence of stackOp
+                if (stack.isEmpty() || this._operatorCache[char].precedence > this._operatorCache[stack.peek()].precedence)
+                stack.push(char);
+            
+                else{
+                    // While currOp has less  or equal precedence than stackOp, pop stackOp to append to postfix. 
+                    //Once you reach a stackOp w/ greater than precedence (or exhausted the stack), push currOp to stack
+                    while ((!stack.isEmpty()) && this._operatorCache[char].precedence <= this._operatorCache[stack.peek()].precedence) {
+                        postfixTokens.push(stack.pop());
+                    }
+                    stack.push(char);
+                }   
+                
+            }
+
+           
+        }
+
+        
+        // Ensure we exhaust the stack and append to postfix 
+        while (!stack.isEmpty()) {
+            postfixTokens.push(stack.pop());
+        }
+        return postfixTokens
+    }
+
 
     /**
      * Evaluates the postfix expression by calculating the result
@@ -114,7 +157,8 @@ export default class Calculator {
 // console.log(postfixconverter.postfix);
 
 const calc = new Calculator();
-let result = calc.calculate("-2.56+-3.*4-5");
+let result = calc.calculate(["2", "+", "3", "*", "4", "-", "5"]);
+// let result = calc.calculate("2+3*4-5");
 // let result = calc.calculate("123.2345477");
 console.log(`${result}`);
 // let result1 = calc._convertToPostfix("2+3*4-5");
