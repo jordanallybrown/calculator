@@ -136,7 +136,7 @@ class _OutputParser {
         return this._expression;
     }
     get expression() {
-        return this._expression.join("");
+        return this._expression.join(" ");
     }
     get result(){
         return this._result;
