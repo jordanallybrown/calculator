@@ -8,6 +8,11 @@ export default class Controller {
     this._view = view;
   }
 
+  handleEqual = (expression) => {
+    this._model.calculate(expression);
+  }
+
+
 
       
 }

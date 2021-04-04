@@ -1,3 +1,5 @@
+import Calculator from "./model/calculator.mjs";
+
 const KEYS = [
     'C', '+/-', '%', '/', 
     '7', '8', '9', '*', 
@@ -26,6 +28,8 @@ export default class View {
         
         // Add all console divs and button keys to calculator grid
         this.calculatorGrid.append(this.console, this._createKeys());
+
+       
         
     }
 
@@ -48,14 +52,15 @@ export default class View {
         console.log(this.outputParser.displayExpression());
     }
 
-    // Methods for the controller
-    getExpression(){
-        return this.outputParser.expression;
+    updateConsoleResult(){
+        this.consoleResult.textContent = this.outputParser.result;
+        console.log('The result is:');
+        console.log(this.outputParser.result);
+        // Clear the expression but not the console viewer, so 
+        // this shows the very last result that was present
+        // this.outputParser.clear();
     }
 
-    setResult(result){
-        this.consoleResult.textContent = result;
-    }
 
     _createKeys(){
 
@@ -101,6 +106,11 @@ export default class View {
                         });
                         break;
                     case '=':
+                        keyElement.addEventListener('click', () => {
+                            this.outputParser.updateResult();
+                            this.updateConsoleResult();
+                        });
+                        break;
                     case '+':
                     case '-':
                     case '*':
@@ -138,6 +148,7 @@ class _OutputParser {
     constructor(){
         this._expression = [];
         this._result = "";
+        this._calculator = new Calculator();
     }
 
     displayExpression(){
@@ -166,6 +177,12 @@ class _OutputParser {
 
     updatePreviousChar(char){
         return this._expression[this._expression.length - 1] = char;
+    }
+
+    updateResult(){
+        if(this._expression.length > 0){
+            this._result = this._calculator.calculate(this._expression);
+        }
     }
 
 
