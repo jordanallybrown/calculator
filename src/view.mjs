@@ -48,6 +48,14 @@ export default class View {
         console.log(this.outputParser.displayExpression());
     }
 
+    // Methods for the controller
+    getExpression(){
+        return this.outputParser.expression;
+    }
+
+    setResult(result){
+        this.consoleResult.textContent = result;
+    }
 
     _createKeys(){
 
