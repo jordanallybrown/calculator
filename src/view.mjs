@@ -3,7 +3,7 @@ const KEYS = [
     '7', '8', '9', '*', 
     '4', '5', '6', '-', 
     '1', '2', '3', '+', 
-    '0', '.', 'b', '='
+    '0', '.', 'backspace', '='
 ];
 
 
@@ -49,36 +49,48 @@ export default class View {
     _createKeys(){
 
         const fragment = document.createDocumentFragment();
+        let keyElement;
 
         KEYS.forEach(key => {
-            // create keyElement, which is a button element for key 
-            const keyElement = this.createElement("button", key);
-            
-            // add a click event listener to keyElement to update console expression according to type
-            switch (key) {
-                case 'C':
-                    keyElement.addEventListener('click', () => {
-                        this.outputParser.clear();
-                        this.updateConsole();
-                    });
-                    break;
-                case 'b':
-                    keyElement.addEventListener('click', () => {
-                        this.outputParser.pop();
-                        this.updateConsole();
-                    });
-                    break;
-                case '+/-':
-                case '.':
-                case '=':
-                default:
-                    keyElement.addEventListener('click', () => {
-                        this.outputParser.append(key);
-                        this.updateConsole();
-                    });
-                    break;
+            // special handling for backspace icon
+            if(key === 'backspace'){
+                // embed the icon element within button to keep grid sizing consistent btw buttons
+                keyElement = this.createElement("button");
+                const iconElement = this.createElement("i", "backspace", "material-icons");
+                keyElement.appendChild(iconElement);
+                keyElement.addEventListener('click', () => {
+                    this.outputParser.pop();
+                    this.updateConsole();
+                });
                 
             }
+
+            else{
+                // create keyElement, which is a button element for key 
+                keyElement = this.createElement("button", key);
+                
+                // add a click event listener to keyElement to update console expression according to type
+                switch (key) {
+                    case 'C':
+                        keyElement.addEventListener('click', () => {
+                            this.outputParser.clear();
+                            this.updateConsole();
+                        });
+                        break;
+                    case '+/-':
+                    case '.':
+                    case '=':
+                    default:
+                        keyElement.addEventListener('click', () => {
+                            this.outputParser.append(key);
+                            this.updateConsole();
+                        });
+                        break;
+                    
+                }
+
+            }
+
 
             fragment.appendChild(keyElement);
 
